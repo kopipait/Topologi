@@ -1,0 +1,9 @@
+## Ini buat Latex-nya ##
+*.log
+*.aux
+*.toc
+*.dvi
+*.pdf
+
+## Ini buat Vim-nya ##
+*.un~

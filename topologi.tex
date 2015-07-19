@@ -1,0 +1,174 @@
+\documentclass{book}
+\usepackage{amsmath, amsfonts,amsthm}
+\usepackage[bahasa]{babel}
+\usepackage{enumitem}
+\usepackage{blindtext}
+
+\title{Sebuah Catatan Tentang Topologi}
+\author{Tom Babinec\and
+		Chris Best\and
+		Michael Bliss\and
+		Nikolai Brendler\and
+		Eric Fu\and
+		Adriane Fung\and
+		Tyler Klein\and
+		Alex Larson\and
+		Topcue Lee\and
+		John Madonna\and
+		Joel Mousseau\and
+		Nick Posavetz\and
+		Matt Rosenberg\and
+		Danielle Rogers\and
+		Andrew Sardone\and
+		Justin Shaler\and
+		Smrithi Srinivasan\and
+		Pete Troyan\and
+		Jackson Yim\and
+		Elizabeth Uible\and
+		Derek Van Farowe\and
+		Paige Warmker\and
+		Zheng Wu\and
+		Nina Zhang\and
+		}
+\date{
+		\today\endgraf
+		\emph{diterjemahkan ke bahasa Indonesia dari Renzo's Math 490: Introduction to Topology}\endgraf}
+
+\begin{document}
+\maketitle
+\tableofcontents
+\newtheorem{definisi}{Definisi}[section]
+\newtheorem{contoh}{Contoh}[section]
+\setenumerate{noitemsep}
+
+\chapter{Topologi}
+Untuk memahami apa itu ruang topologi, ada beberapa definisi dan permasalahan yang harus kita ketahui dulu. Kita akan membahas ruang metrik, himpunan terbuka, dan himpunan tertutup. Sekali kita mengerti istilah istilah ini, kita akan punya cukup kosakata untuk mendefinisikan topologi.
+
+\section{Ruang Metrik}
+\begin{definisi}
+\emph{Ruang metrik} adalah suatu himpunan $X$ dimana kita bisa mendefinisikan jarak. Yaitu jika $x,y \in X$ maka $d(x,y)$ adalah ``jarak"nya. Fungsi jarak ini harus memenuhi kondisi kondisi ini:
+\begin{enumerate}
+\item $d(x,y) \geq 0$ untuk semua $x,y \in X$
+\item $d(x,y) = 0$ jika dan hanya jika $x = y$
+\item $d(x,y)=d(y,x)$
+\item $d(x,z) \leq d(x,y) + d(y,z)$
+\end{enumerate}
+\end{definisi}
+
+Untuk memahami konsep ini, akan sangat menolong jika kita melihat beberapa contoh mana yang termasuk jarak dalam ruang metrik dan mana yang bukan.
+
+\begin{contoh}
+Untuk sembarang ruang $X$, misalkan $d(x,y)=0$ jika $x=y$ dan $d(x,y)=1$ untuk lainnya.
+\end{contoh}
+
+\noindent Metrik ini, disebut \emph{metrik diskrit}, memenuhi semua kondisi di atas.
+
+\begin{contoh}
+Teorema Pythagoras menghasilkan cara familier dalam menghitung jarak dalam $\mathbb R^n$. Jika $x=(x_1,x_2,\dots,x_n)$ dan $y=(y_1,y_2,\dots,y_n)$, fungsi jarak adalah:
+\[
+d(x,y) = \sqrt{\sum\limits_{i=1}^n (x_i - y_i)^2} 
+\]
+\end{contoh}
+
+\begin{contoh}
+Misalkan $f$ dan $g$ adalah fungsi dalam ruang $X = \{ f:[0,1]\rightarrow\mathbb R \}$. Apakah $d(f,g)=max|f - g|$ mendefinisikan sebuah metrik?
+\end{contoh}
+
+Lagi lagi, untuk mengetahui apakah $d(f,g)$ metrik atau bukan, kita uji apakah fungsi ini memenuhi kriteria kriteria di atas. Contoh ini gagal mengikuti syarat ke 2, sebagaimana dapat ditunjukkan dengan membayangkan dua fungsi pada sembarang titik dalam selang $[0,1]$. $|f(x) - g(x)| = 0$ tidak selalu bahwa $f = g$ karena $f$ dan $g$ mungkin saja dua fungsi berbeda yang berpotongan pada satu dan hanya satu titik. Maka $d(f,g)$ tidak bisa menjadi metrik di ruang tersebut.
+
+\section{Himpunan Terbuka (dalam ruang metrik)}
+Sekarang, setelah kita punya gambaran tentang apa itu jarak, kita dapat mendefinisikan apa yang dimaksud dengan himpunan terbuka pada suatu ruang metrik.
+
+\begin{definisi}
+Misalkan $X$ adalah ruang metrik. Suatu \emph{bola} $B$ berjari jari $r$ mengelilingi titik $x\in X$ adalah $B = \{ y\in X|d(x,y) < r \}$.
+\end{definisi}
+
+\noindent Kita bisa katakan bola ini melingkupi semua titik yang jaraknya terhadap $x$ lebih kecil dari $r$.
+
+\begin{definisi}
+Suatu subhimpunan $O\subseteq X$ disebut \emph{terbuka} jika untuk setiap titik $x\in O$, ada bola mengelilingi $x$ yang keseluruhannya termuat dalam $O$.
+\end{definisi}
+
+\begin{contoh}
+Misal $X = [0,1]$. Selang $(0,1/2)$ terbuka di dalam $X$
+\end{contoh}
+\begin{contoh}
+Misal $X = \mathbb R$. Selang $[0,1/2)$ tidak terbuka di dalam $X$.
+\end{contoh}
+
+Dalam suatu himpunan terbuka, kita dapat mengambil sembarang titik anggota himpunan, bergerak dengan langkah infinitesimal ke sembarang arah, dan sampai pada titik lain yang masih di dalam himpunan tersebut. Pada contoh pertama, kita dapat mengambil sembarang titik $0<x<1/2$ dan mencari suatu titik di kanan atau kirinya, di dalam ruang $[0,1]$ yang juga masih dalam himpunan terbuka $[0,1)$. Akan tetapi, hal ini tidak bisa dilakukan pada contoh kedua. Katakan jika kita memilih titik di dalam himpunan $[0,1)$ misalnya $0$, dan mengambil langkah infinitesimal ke kiri dengan tetap berada dalam ruang $S$, kita tidak lagi di dalam himpunan $[0,1)$. Maka ini bukanlah himpunan terbuka dalam $\mathbb R$.
+
+Ketika suatu himpunan terbuka, \emph{tidak selalu berarti himpunan itu tertutup}. Lebih jauh lagi, ada himpunan yang tidak terbuka maupun tertutup, dan ada himpunan yang terbuka sekaligus juga tertutup.
+
+Himpunan terbuka dalam ruang $X$ memiliki sifat sifat berikut:
+\begin{enumerate}
+\item Himpunan kosong adalah himpunan terbuka.
+\item Keseluruhan ruang $X$ adalah terbuka.
+\item Gabungan dari sembarang kumpulan himpunan terbuka adalah terbuka.
+\item Irisan sejumlah \emph{terhingga} himpunan terbuka adalah terbuka
+\end{enumerate}
+
+\section{Himpunan Tertutup (dalam ruang metrik)}
+Meskipun kita bisa dan akan mendefinisikan himpunan tertutup dengan menggunakan definisi himpunan terbuka, pertama kita akan mendefinisikannya dengan menggunakan pengertian titik limit.
+
+\begin{definisi}
+Suatu titik $z$ disebut \emph{titik limit} untuk himpunan $A$ jika setiap himpunan terbuka $U$ yang berisi $z$ mengiris $A$ di titik selain $z$.
+\end{definisi}
+\noindent Perhatikan bahwa titik $z$ bisa saja di dalam $A$ atau tidak di dalam $A$. Contoh berikut akan menjelaskannya.
+
+\begin{contoh}
+Misalkan ada suatu cakram terbuka satuan $D = \{(x,y): x^2 + y^2 < 1\}$. Sembarang titik di $D$ adalah titik limit $D$. Ambil $(0,0)$ di $D$. Sembarang himpunan terbuka $U$ di sekitar titik ini akan berisi titik lain dalam $D$. Sekarang bayangkan titik $(1,0)$, yang tidak berada di dalam $D$. Ini juga titik limit karena sembarang himpunan terbuka di sekitar $(1,0)$ akan mengiris cakram $D$.
+\end{contoh}
+\noindent Teorema dan contoh berikut akan memberikan kita cara untuk mendefinisikan himpunan tertutup.
+
+\begin{definisi}
+Suatu himpunan $C$ dikatakan \emph{tertutup} jika dan hanya jika dia berisi semua titik limitnya.
+\end{definisi}
+
+\begin{contoh}
+Cakram satuan pada contoh sebelumnya tidak tertutup karena tidak berisi semua titik limitnya, yaitu $(1,0)$.
+\end{contoh}
+\begin{contoh}
+Misalkan $A=\mathbb Z$ adalah subhimpunan dari $\mathbb R$. Ini adalah himpunan tertutup karena dia berisi semua titik limitnya: yaitu tidak ada! Suatu himpunan yang tidak memiliki titik limit adalah tertutup, secara default, karena dia berisi semua titik limitnya.
+\end{contoh}
+
+Setiap irisan dari himpunan himpunan tertutup adalah tertutup, dan setiap gabungan terhingga himpunan tertutup adalah tertutup.
+
+\section{Ruang Topologi}
+Akan kita lihat kasus yang lebih umum dari ruang \emph{tanpa} metrik, di mana kita masih bisa (atau setidaknya mendefinisikan dengan tepat) menyatakan himpunan terbuka dan tertutup. Ruang ini disebut \emph{ruang topologi}.
+
+\begin{definisi}
+Suatu \emph{ruang topologi} adalah pasangan $(X, \tau)$ di mana $X$ adalah suatu himpunan dan $\tau$ adalah himpunan dari subhimpunan subhimpunan $X$ yang memenuhi aksioma aksioma tertentu. $\tau$ disebut topologi.
+\end{definisi}
+\noindent Karena definisi ini belum cukup mencerahkan, kita harus memperjelas apa itu topologi.
+
+\begin{definisi}
+Suatu \emph{topologi} $\tau$ pada himpunan $X$ yang berisi subhimpunan subhimpunan dari $X$ harus memenuhi sifat sifat ini.
+\begin{enumerate}
+\item Himpunan kosong $\emptyset$ dan ruang $X$ keduanya termasuk dalam topologi.
+\item Gabungan dari sembarang kumpulan himpunan dalam $\tau$ termuat dalam $\tau$.
+\item Irisan dari sejumlah terhingga himpunan dalam $\tau$ juga termuat dalam $\tau$
+\end{enumerate}
+\end{definisi}
+\noindent Contoh berikut akan memperjelas konsep ini.
+
+\begin{contoh}
+Jika himpunan $X$ berisi tiga titik $X = \{ a,b,c \}$, tentukan apakah himpunan $\tau = \{ \emptyset, X, \{a\}, \{b\} \}$ memenuhi persyaratan untuk disebut topologi.
+\end{contoh}
+\noindent Ini, bukanlah topologi karena gabungan dari dua himpunan $\{a\}$ dan $\{b\}$ adalah himpunan $\{a,b\}$, yang bukan anggota dari $\tau$
+
+\begin{contoh}
+Cari semua topologi yang mungkin pada $X$.
+\begin{enumerate}
+\item $\emptyset, \{a,b\}$
+\item $\emptyset, \{a\}, \{a,b\}$
+\item $\emptyset, \{b\}, \{a,b\}$
+\item $\emptyset, \{a\}, \{b\}, \{a,b\}$
+\end{enumerate}
+\end{contoh}
+\noindent Pembaca dapat memeriksa bahwa semuanya adalah topologi dengan memastikan mereka itu mengikuti 3 sifat di atas. Topologi pertama adalah topologi yang umum dan biasanya dinamakan \emph{topologi indiskrit}. Topologi ini himpunan kosong dan keseluruhan ruang $X$. Contoh contoh selanjutnya akan memperkenalkan beberapa topologi umum lainnya.
+\begin{contoh}
+Jika $X$ adalah sebuah himpunan dan $\tau$ adalah topologi pada $X$, dapat dikatakan bahwa himpunan himpunan di $\tau$ terbuka. Maka jika $X$ memiliki metrik (memiliki arti jarak), $\tau = \text{semua himpunan terbuka yang didefinisikan oleh bola di atas}$ adalah topologi. Kita sebut topologi ini \emph{topologi Euclid}. Ini juga mengacu pada topologi yang biasa.
+\end{contoh}
+
+\end{document}
